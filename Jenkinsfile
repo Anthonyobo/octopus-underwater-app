@@ -15,8 +15,15 @@ pipeline {
         stage('Build') { 
             steps { 
                 script{
-                 app = docker.build("octopus-underwater-app")
+                 app = docker.build("underwater")
                 }
+            }
+        }
+        stage('Run'){
+            steps {
+                 sh """
+                    docker run --rm underwater
+                 """
             }
         }
         stage('Test'){
